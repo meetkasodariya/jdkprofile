@@ -1,16 +1,3 @@
-// // You can add JavaScript functionality here if needed
-// document.addEventListener('DOMContentLoaded', function() {
-//     console.log('Website loaded successfully!');
-    
-//     // Example: Add click event for call button
-//     const callButton = document.querySelector('.call-button');
-//     if (callButton) {
-//         callButton.addEventListener('click', function() {
-//             console.log('Call button clicked!');
-//             // You could add additional functionality here
-//         });
-//     }
-// });
 document.addEventListener('DOMContentLoaded', function() {
     console.log('JDK GROUP website loaded successfully!');
     
