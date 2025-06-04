@@ -5,21 +5,53 @@ document.addEventListener('DOMContentLoaded', function() {
     const socialCards = document.querySelectorAll('.social-card');
     const callButton = document.getElementById('callButton');
     const callPopup = document.getElementById('callPopup');
-    const saveContactBtn = document.getElementById('saveContact');
     
-    // Add touch/click effects to all social cards
+    // Handle all card interactions with a single approach
     socialCards.forEach(card => {
-        // Touch/click start
-        card.addEventListener('mousedown', handlePressStart);
-        card.addEventListener('touchstart', handlePressStart);
+        // Press effect
+        card.addEventListener('mousedown', function() {
+            this.style.transform = 'translateY(2px) scale(0.98)';
+            this.style.boxShadow = '0 3px 5px rgba(0, 0, 0, 0.2)';
+        });
         
-        // Touch/click end
-        card.addEventListener('mouseup', handlePressEnd);
-        card.addEventListener('touchend', handlePressEnd);
-        card.addEventListener('mouseleave', handlePressEnd);
+        card.addEventListener('touchstart', function() {
+            this.style.transform = 'translateY(2px) scale(0.98)';
+            this.style.boxShadow = '0 3px 5px rgba(0, 0, 0, 0.2)';
+        }, { passive: true });
         
-        // Click analytics
-        card.addEventListener('click', trackSocialClick);
+        // Release effect
+        card.addEventListener('mouseup', function() {
+            this.style.transform = 'translateY(-5px) scale(1.03)';
+            this.style.boxShadow = '0 10px 20px rgba(0, 0, 0, 0.15)';
+        });
+        
+        card.addEventListener('touchend', function() {
+            this.style.transform = 'translateY(-5px) scale(1.03)';
+            this.style.boxShadow = '0 10px 20px rgba(0, 0, 0, 0.15)';
+        }, { passive: true });
+        
+        // Reset when leaving
+        card.addEventListener('mouseleave', function() {
+            if (!this.classList.contains('call') || !this.classList.contains('active')) {
+                this.style.transform = '';
+                this.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
+            }
+        });
+        
+        // Click tracking
+        card.addEventListener('click', function(e) {
+            if (this.classList.contains('call')) {
+                e.preventDefault();
+                return;
+            }
+            
+            const platform = this.classList.contains('instagram') ? 'Instagram' :
+                           this.classList.contains('linkedin') ? 'LinkedIn' :
+                           this.classList.contains('facebook') ? 'Facebook' :
+                           this.classList.contains('whatsapp') ? 'WhatsApp' :
+                           this.classList.contains('map') ? 'Map' : 'Call';
+            console.log(`JDK GROUP: ${platform} button clicked`);
+        });
     });
     
     // Call button functionality
@@ -32,72 +64,33 @@ document.addEventListener('DOMContentLoaded', function() {
                 this.style.transform = 'translateY(-10px) scale(1.05)';
                 this.style.boxShadow = '0 15px 30px rgba(0, 0, 0, 0.2)';
             } else {
-                resetButtonStyles(this);
+                this.style.transform = '';
+                this.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
             }
         });
-    }
-    
-    // Save contact button functionality
-    if (saveContactBtn) {
-        saveContactBtn.addEventListener('click', function(e) {
-            e.stopPropagation();
-            saveContact();
-            if (callButton) {
+        
+        // Save contact button functionality
+        const saveContactBtn = callPopup.querySelector('.save-contact');
+        if (saveContactBtn) {
+            saveContactBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                alert('Contact saved: JDK GROUP - +91 63556 04903');
                 callButton.classList.remove('active');
-                resetButtonStyles(callButton);
-            }
-        });
+                callButton.style.transform = '';
+                callButton.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
+            });
+        }
     }
     
     // Close popup when clicking outside
     document.addEventListener('click', function(e) {
         if (callButton && !callButton.contains(e.target)) {
             callButton.classList.remove('active');
-            resetButtonStyles(callButton);
+            callButton.style.transform = '';
+            callButton.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
         }
     });
-    
-    // Helper functions
-    function handlePressStart(e) {
-        if (e.type === 'touchstart') e.preventDefault();
-        this.style.transform = 'translateY(2px) scale(0.98)';
-        this.style.boxShadow = '0 3px 5px rgba(0, 0, 0, 0.2)';
-    }
-    
-    function handlePressEnd(e) {
-        if (!this.classList.contains('call') || !this.classList.contains('active')) {
-            resetButtonStyles(this);
-        }
-    }
-    
-    function resetButtonStyles(button) {
-        button.style.transform = '';
-        button.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
-    }
-    
-    function trackSocialClick(e) {
-        if (this.classList.contains('call')) {
-            e.preventDefault();
-            return;
-        }
-        
-        const platform = this.classList.contains('instagram') ? 'Instagram' :
-                       this.classList.contains('linkedin') ? 'LinkedIn' :
-                       this.classList.contains('facebook') ? 'Facebook' :
-                       this.classList.contains('whatsapp') ? 'WhatsApp' :
-                       this.classList.contains('map') ? 'Map' : 'Call';
-        console.log(`JDK GROUP: ${platform} button clicked`);
-    }
-    
-    function saveContact() {
-        // In a real app, this would use the Contacts API
-        const phoneNumber = '+91 63556 04903';
-        alert(`Contact saved: JDK GROUP - ${phoneNumber}`);
-        
-        // For actual implementation, you might use:
-        // window.open(`tel:${phoneNumber}`, '_blank');
-    }
-    
+
     // Optional: Add animation for logo when page loads
     const logo = document.querySelector('.logo');
     if (logo) {
