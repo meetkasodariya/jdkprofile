@@ -15,9 +15,9 @@ body {
     justify-content: center;
     padding: 20px;
     overflow-x: hidden;
+    touch-action: manipulation;
 }
 
-/* Main Container */
 .container {
     width: 100%;
     max-width: 800px;
@@ -34,26 +34,23 @@ body {
 }
 
 .logo {
-    width: 120px;
-    height: 120px;
-    background: white;
-    border-radius: 50%;
+    width: 180px;
+    height: 180px;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0 auto 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    padding: 10px;
     transform: translateY(50px);
     opacity: 0;
     animation: slideUp 1s forwards 0.3s;
 }
 
 .logo img {
-    max-width: 100%;
+    width: 100%;
+    height: auto;
     max-height: 100%;
     object-fit: contain;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 .logo-text {
@@ -103,6 +100,7 @@ body {
     position: relative;
     overflow: hidden;
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .social-card::before {
@@ -115,6 +113,11 @@ body {
     background: inherit;
     opacity: 0.9;
     z-index: 1;
+}
+
+.social-card:active {
+    transform: translateY(2px) scale(0.98);
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
 }
 
 .social-card:hover {
@@ -184,6 +187,7 @@ body {
     font-size: 12px;
     cursor: pointer;
     transition: all 0.2s;
+    border: none;
 }
 
 .call-now {
@@ -192,11 +196,13 @@ body {
     text-decoration: none;
     flex: 1;
     margin-right: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .save-contact {
     background: #f1f1f1;
-    border: none;
     color: #333;
     flex: 1;
     margin-left: 5px;
@@ -230,14 +236,14 @@ body {
 }
 
 /* Responsive Design */
-/* @media (max-width: 768px) {
+@media (max-width: 768px) {
     .container {
         width: 70%;
     }
     
     .logo {
-        width: 100px;
-        height: 100px;
+        width: 150px;
+        height: 150px;
     }
 
     .social-card {
@@ -248,15 +254,15 @@ body {
     .social-icon {
         font-size: 25px;
     }
-} */
+}
 
-@media (max-width: 768px) {
+@media (max-width: 480px) {
     .container {
         width: 70%;
     }
     
     .social-section {
-        gap: 15px;
+        gap: 10px;
     }
 
     .social-card {
@@ -266,7 +272,7 @@ body {
     }
 
     .social-icon {
-        font-size: 20px;
+        font-size: 25px;
     }
 
     .social-text {
