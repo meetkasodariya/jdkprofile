@@ -2,96 +2,66 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('JDK GROUP website loaded successfully!');
     
     // Initialize elements
-    const socialCards = document.querySelectorAll('.social-card');
     const callButton = document.getElementById('callButton');
-    const callPopup = document.getElementById('callPopup');
+    const socialCards = document.querySelectorAll('.social-card');
     
-    // Handle all card interactions with a single approach
+    // Check if device is touch-enabled
+    const isTouchDevice = 'ontouchstart' in window;
+    
+    // Handle card interactions
     socialCards.forEach(card => {
-        // Press effect
-        card.addEventListener('mousedown', function() {
-            this.style.transform = 'translateY(2px) scale(0.98)';
-            this.style.boxShadow = '0 3px 5px rgba(0, 0, 0, 0.2)';
-        });
+        // Add press effect for both mouse and touch
+        card.addEventListener('mousedown', addPressEffect);
+        card.addEventListener('touchstart', addPressEffect, { passive: true });
         
-        card.addEventListener('touchstart', function() {
-            this.style.transform = 'translateY(2px) scale(0.98)';
-            this.style.boxShadow = '0 3px 5px rgba(0, 0, 0, 0.2)';
-        }, { passive: true });
+        // Remove press effect
+        card.addEventListener('mouseup', removePressEffect);
+        card.addEventListener('touchend', removePressEffect, { passive: true });
+        card.addEventListener('mouseleave', removePressEffect);
         
-        // Release effect
-        card.addEventListener('mouseup', function() {
-            this.style.transform = 'translateY(-5px) scale(1.03)';
-            this.style.boxShadow = '0 10px 20px rgba(0, 0, 0, 0.15)';
-        });
-        
-        card.addEventListener('touchend', function() {
-            this.style.transform = 'translateY(-5px) scale(1.03)';
-            this.style.boxShadow = '0 10px 20px rgba(0, 0, 0, 0.15)';
-        }, { passive: true });
-        
-        // Reset when leaving
-        card.addEventListener('mouseleave', function() {
-            if (!this.classList.contains('call') || !this.classList.contains('active')) {
-                this.style.transform = '';
-                this.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
-            }
-        });
-        
-        // Click tracking
-        card.addEventListener('click', function(e) {
-            if (this.classList.contains('call')) {
-                e.preventDefault();
-                return;
-            }
-            
-            const platform = this.classList.contains('instagram') ? 'Instagram' :
-                           this.classList.contains('linkedin') ? 'LinkedIn' :
-                           this.classList.contains('facebook') ? 'Facebook' :
-                           this.classList.contains('whatsapp') ? 'WhatsApp' :
-                           this.classList.contains('map') ? 'Map' : 'Call';
-            console.log(`JDK GROUP: ${platform} button clicked`);
-        });
-    });
-    
-    // Call button functionality
-    if (callButton) {
-        callButton.addEventListener('click', function(e) {
-            e.stopPropagation();
-            this.classList.toggle('active');
-            
-            if (this.classList.contains('active')) {
-                this.style.transform = 'translateY(-10px) scale(1.05)';
-                this.style.boxShadow = '0 15px 30px rgba(0, 0, 0, 0.2)';
-            } else {
-                this.style.transform = '';
-                this.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
-            }
-        });
-        
-        // Save contact button functionality
-        const saveContactBtn = callPopup.querySelector('.save-contact');
-        if (saveContactBtn) {
-            saveContactBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                alert('Contact saved: JDK GROUP - +91 63556 04903');
-                callButton.classList.remove('active');
-                callButton.style.transform = '';
-                callButton.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
+        // For touch devices, add hover effect on touch
+        if (isTouchDevice) {
+            card.addEventListener('touchend', function() {
+                this.classList.add('hover-effect');
+                setTimeout(() => {
+                    this.classList.remove('hover-effect');
+                }, 300);
             });
         }
+    });
+    
+    // Call button functionality - toggle popup
+    if (callButton) {
+        callButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            this.classList.toggle('active');
+        });
     }
     
     // Close popup when clicking outside
     document.addEventListener('click', function(e) {
         if (callButton && !callButton.contains(e.target)) {
             callButton.classList.remove('active');
-            callButton.style.transform = '';
-            callButton.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
         }
     });
 
-    // Optional: Add animation for logo when page loads
+    // Helper functions
+    function addPressEffect() {
+        if (!this.classList.contains('active')) {
+            this.style.transform = 'translateY(2px) scale(0.98)';
+            this.style.boxShadow = '0 3px 5px rgba(0, 0, 0, 0.2)';
+        }
+    }
+    
+    function removePressEffect() {
+        if (!this.classList.contains('active')) {
+            this.style.transform = '';
+            this.style.boxShadow = '';
+        }
+    }
+
+    // Logo animation
     const logo = document.querySelector('.logo');
     if (logo) {
         setTimeout(() => {
