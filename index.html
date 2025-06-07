@@ -21,15 +21,13 @@
         <!-- Social Media Section -->
         <div class="social-section">
             <!-- Call Button -->
-            <div class="social-card call">
-                <a href="tel:+916355604903" class="social-link">
-                    <div class="social-icon">
-                        <i class="fas fa-phone"></i>
-                    </div>
-                    <span class="social-text">Call Us</span>
-                </a>
-                <button onclick="saveContact()" class="social-button">Save Contact</button>
-            </div>
+           <a href="tel:+916355604903" class="social-card call">
+    <div class="social-icon">
+        <i class="fas fa-phone"></i>
+    </div>
+    <span class="social-text">Call Us</span>
+</a>
+
 
             <!-- WhatsApp -->
             <a href="https://wa.me/916355604903" class="social-card whatsapp" target="_blank">
@@ -79,30 +77,6 @@
     </div>
 
     <script>
-        function saveContact() {
-            const contactName = "JDK GROUP";
-            const phoneNumber = "+916355604903";
-            const vCardData = `
-BEGIN:VCARD
-VERSION:3.0
-FN:${contactName}
-TEL:${phoneNumber}
-END:VCARD
-            `.trim();
-
-            // Create a Blob for the vCard file
-            const blob = new Blob([vCardData], { type: 'text/vcard' });
-            const url = window.URL.createObjectURL(blob);
-
-            // Create a temporary link to trigger download
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = 'jdk_group_contact.vcf';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            window.URL.revokeObjectURL(url);
-        }
-    </script>
+      </script>
 </body>
 </html>
