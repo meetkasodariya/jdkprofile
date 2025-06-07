@@ -12,7 +12,6 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* justify-content: center; */
     padding: 20px;
     overflow-x: hidden;
     touch-action: manipulation;
@@ -35,7 +34,7 @@ body {
 
 .logo {
     width: 180px;
-    height: 180px;
+    /* height: 180px; */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -57,7 +56,7 @@ body {
     font-size: 28px;
     font-weight: bold;
     color: black;
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
     transform: translateY(-50px);
     opacity: 0;
     animation: slideDown 1s forwards 0.3s;
@@ -100,7 +99,7 @@ body {
     position: relative;
     overflow: hidden;
     cursor: pointer;
-    touch-action: manipulation; 
+    touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
 }
 
@@ -114,11 +113,6 @@ body {
     background: inherit;
     opacity: 0.9;
     z-index: 1;
-}
-
-.social-card:active {
-    transform: translateY(2px) scale(0.98);
-    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
 }
 
 .social-card:hover {
@@ -146,73 +140,62 @@ body {
 .facebook { background-color: #3B5998; }
 .whatsapp { background-color: #25D366; }
 .map { background-color: #EB4335; }
-.call { background-color: #34a853; position: relative; }
+.call { background-color: #34a853; }
+.google { background-color: #a2b11fb2; }
+.google .social-icon i { color: white; }
 
 /* Call Popup */
 .call-popup {
-    position: absolute;
-    bottom: 110%;
-    left: 50%;
-    transform: translateX(-50%) scale(0.9);
-    background: white;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    width: 200px;
-    text-align: center;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-    z-index: 10;
-}
-
-.call-popup::after {
-    content: '';
+    display: none;
     position: absolute;
     top: 100%;
     left: 50%;
     transform: translateX(-50%);
-    border-width: 8px;
-    border-style: solid;
-    border-color: white transparent transparent transparent;
-}
-
-.call-actions {
-    display: flex;
-    justify-content: space-between;
-}
-
-.call-now, .save-contact {
-    padding: 8px 12px;
-    border-radius: 5px;
-    font-size: 12px;
-    cursor: pointer;
-    transition: all 0.2s;
-    border: none;
-}
-
-.call-now {
-    background: #34a853;
-    color: white;
-    text-decoration: none;
-    flex: 1;
-    margin-right: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.save-contact {
-    background: #f1f1f1;
-    color: #333;
-    flex: 1;
-    margin-left: 5px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    z-index: 10;
+    min-width: 200px;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .call.active .call-popup {
+    display: block;
     opacity: 1;
-    visibility: visible;
-    transform: translateX(-50%) scale(1);
+    transform: translateX(-50%) translateY(5px);
+}
+
+.call-popup p {
+    margin: 5px 0;
+    color: #333333;
+    font-size: 14px;
+}
+
+.phone-number {
+    font-weight: 600;
+    color: #6372ff;
+}
+
+.call-actions {
+    margin-top: 10px;
+}
+
+.call-now {
+    display: inline-block;
+    padding: 8px 15px;
+    background: linear-gradient(45deg, #ff8a00, #e52e71);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: background 0.3s ease;
+}
+
+.call-now:hover {
+    background: linear-gradient(45deg, #e52e71, #ff8a00);
 }
 
 /* Animations */
@@ -236,19 +219,35 @@ body {
     to { opacity: 1; }
 }
 
+@keyframes slideInFromLeft {
+    0% { transform: translateX(-100%); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+}
+
+/* Powered By */
+.powered-by {
+    text-align: center;
+    margin-top: 30px;
+    padding: 15px 0;
+    color: #666;
+    font-size: 11px;
+    border-top: 1px solid #eee;
+    overflow: hidden;
+}
+
+.powered-by p {
+    position: relative;
+    display: inline-block;
+    animation: slideInFromLeft 1s ease-out forwards;
+    opacity: 0;
+}
+
 /* Mobile-specific hover simulation */
 @media (hover: none) {
     .social-card.hover-effect {
         transform: translateY(-5px) scale(1.03) !important;
         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15) !important;
     }
-}
-
-/* Ensure proper transitions */
-.social-card {
-    transition: 
-        transform 0.2s ease-out,
-        box-shadow 0.2s ease-out;
 }
 
 /* Call popup adjustments for mobile */
@@ -263,49 +262,16 @@ body {
         gap: 8px;
     }
     
-    .call-now, .save-contact {
+    .call-now {
         width: 100%;
         margin: 0;
     }
 }
 
-.powered-by {
-    text-align: center;
-    margin-top: 30px;
-    padding: 15px 0;
-    color: #666;
-    font-size: 14px;
-    border-top: 1px solid #eee;
-    overflow: hidden;
-}
-
-.powered-by p {
-    position: relative;
-    display: inline-block;
-    animation: slideInFromLeft 1s ease-out forwards;
-    opacity: 0;
-}
-@keyframes slideInFromLeft {
-    0% {
-        transform: translateX(-100%);
-        opacity: 0;
-    }
-    100% {
-        transform: translateX(0);
-        opacity: 1;
-    }
-}
-.social-card.google {
-    background-color: #a2b11fb2;
-    color: white;
-  }
-  .social-card.google .social-icon i {
-    color: white;
-  }
-  
-/* @media (max-width: 480px) {
+/* Smaller screens */
+@media (max-width: 480px) {
     .container {
-        width: 70%;
+        width: 90%;
     }
     
     .social-section {
@@ -313,8 +279,8 @@ body {
     }
 
     .social-card {
-        width: 70px;
-        height: 70px;
+        width: 80px;
+        height: 80px;
         border-radius: 15px;
     }
 
@@ -327,6 +293,7 @@ body {
     }
 
     .call-popup {
-        width: 160px;
+        width: 140px;
+        min-width: 140px;
     }
-}  */
+}
