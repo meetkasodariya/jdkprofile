@@ -1,36 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     console.log('JDK GROUP website loaded successfully!');
-    document.getElementById('saveContactBtn').addEventListener('click', function() {
-        // Android devices
-        if (/android/i.test(navigator.userAgent)) {
-            window.location.href = 'content://com.android.contacts/contacts/people/editcontact?' +
-                                 'phone=' + encodeURIComponent('+916355604903') + 
-                                 '&name=' + encodeURIComponent('JDK GROUP');
-        } 
-        // iOS devices
-        else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-            const vCard = `BEGIN:VCARD
-    VERSION:3.0
-    FN:JDK GROUP
-    TEL;TYPE=WORK,VOICE:+916355604903
-    END:VCARD`;
-            
-            const blob = new Blob([vCard], { type: 'text/vcard' });
-            const url = URL.createObjectURL(blob);
-            
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = 'JDK_GROUP.vcf';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        }
-        // Other devices
-        else {
-            alert('Please save this contact:\nName: JDK GROUP\nPhone: +91 6355604903');
-        }
-    });
-  
+    
     // Initialize elements
     const callButton = document.getElementById('callButton');
     const callPopup = document.getElementById('callPopup');
