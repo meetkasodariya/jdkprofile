@@ -219,8 +219,8 @@ footer {
     }
     
     .social-card {
-        width: 70px;
-        height: 70px;
+        width: 80px;
+        height: 80px;
     }
     
     .social-icon {
@@ -238,8 +238,8 @@ footer {
 
 @media (max-width: 350px) {
     .social-card {
-        width: 65px;
-        height: 65px;
+        width: 80px;
+        height: 80px;
     }
     
     .social-icon {
@@ -275,6 +275,7 @@ footer {
     }
     
     .social-card {
-        height: 60px;
+        width: 80px;
+        height: 80px;
     }
 }
