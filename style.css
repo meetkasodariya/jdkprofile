@@ -9,23 +9,22 @@ body {
     background-color: #ad9d9d;
     color: #333;
     min-height: 100vh;
-    height: 100vh; /* Ensure body takes full viewport height */
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 0px;
+    padding: 0;
     overflow-x: hidden;
     touch-action: manipulation;
 }
 
 .container {
     width: 400px;
-    height: 100%; /* Take full height of parent */
+    min-height: 100vh;
     background-color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: relative; /* Needed for footer positioning */
+    position: relative;
 }
 
 /* Logo Section */
@@ -94,12 +93,10 @@ body {
     gap: 14px;
     width: 100%;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 20px 80px; /* Added bottom padding for footer */
     opacity: 0;
     transform: translateX(50px);
     animation: slideFromRight 1s forwards 0.8s;
-    /* flex-grow: 1; */
-     /* Allow this section to grow and take available space */
 }
 
 .social-card {
@@ -133,11 +130,6 @@ body {
     z-index: 1;
 }
 
-/* .social-card:hover {
-    transform: translateY(-10px) scale(1.05);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-} */
-
 .social-icon {
     position: relative;
     z-index: 2;
@@ -159,6 +151,7 @@ body {
 .map { background-color: #EB4335; }
 .call { background-color: #34a853; }
 .google { background-color: #a2b11fb2; }
+.email { background-color: #D44638; }
 .google .social-icon i { color: white; }
 .website { background: linear-gradient(45deg, #6e45e2, #88d3ce); }
 
@@ -166,10 +159,15 @@ body {
 footer {
     width: 100%;
     text-align: center;
-    padding: 10px 0;
+    padding: 15px 0;
     background: #333;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-    margin-top: auto; /* Push footer to bottom */
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-width: 400px;
+    margin: 0 auto;
+    z-index: 100;
 }
 
 .footer-content {
@@ -213,14 +211,6 @@ footer {
     100% { background-position: 0% 50%; }
 }
 
-/* Mobile-specific hover simulation */
-@media (hover: none) {
-    .social-card.hover-effect {
-        transform: translateY(-5px) scale(1.03) !important;
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15) !important;
-    }
-}
-
 /* Responsive adjustments */
 @media (max-width: 420px) {
     .container {
@@ -230,11 +220,28 @@ footer {
     .logo-section {
         border-radius: 0 0 25% 25%;
     }
+    
+    footer {
+        max-width: 100%;
+    }
+    .footer-content {
+        font-size: 10px;
+    }
+
+    footer {
+        padding: 8px 0;
+    }
 }
 
 @media (max-height: 700px) {
-    
-   .logo {
+    .footer-content {
+        font-size: 10px;
+    }
+
+    footer {
+        padding: 8px 0;
+    }
+    .logo {
         width: 150px;
     }
     
@@ -247,8 +254,8 @@ footer {
     }
     
     .social-card {
-        width: 70px;
-        height: 70px;
+        width: 60px;
+        height: 60px;
     }
     
     .social-icon {
