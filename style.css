@@ -133,10 +133,10 @@ body {
     z-index: 1;
 }
 
-.social-card:hover {
+/* .social-card:hover {
     transform: translateY(-10px) scale(1.05);
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-}
+} */
 
 .social-icon {
     position: relative;
@@ -233,7 +233,8 @@ footer {
 }
 
 @media (max-height: 700px) {
-    .logo {
+    
+   .logo {
         width: 150px;
     }
     
