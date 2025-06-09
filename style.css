@@ -76,7 +76,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 20px;
+    gap: 14px;
     width: 100%;
     margin: 0 auto;
     opacity: 0;
@@ -143,6 +143,7 @@ body {
 .call { background-color: #34a853; }
 .google { background-color: #a2b11fb2; }
 .google .social-icon i { color: white; }
+.website { background: linear-gradient(45deg, #6e45e2, #88d3ce); }
 
 /* Call Popup */
 .call-popup {
@@ -275,17 +276,17 @@ body {
     }
     
     .social-section {
-        gap: 10px;
+        gap: 20px;
     }
 
     .social-card {
-        width: 90px;
-        height: 90px;
+        width: 70px;
+        height: 70px;
         border-radius: 15px;
     }
 
     .social-icon {
-        font-size: 30px;
+        font-size: 25px;
     }
 
     .social-text {
