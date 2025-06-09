@@ -148,8 +148,8 @@ footer {
     padding: 10px 0;
     background: #333;
     position: fixed;
-    bottom: 40px;
-    /* z-index: 10; */
+    bottom: 0;
+    z-index: 10;
 }
 
 .footer-content {
