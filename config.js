@@ -17,4 +17,4 @@ const companyConfig = {
         googleReviews: "https://g.page/r/CSKAQ9nHeDtXEAI/review",
         map: "https://maps.google.com/?q=JDK Group, Surbhi Mall, 206, Waghawadi Rd., Hill Drive, Bhavnagar, Gujarat 364001"
     }
-};
+};      
